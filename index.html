@@ -189,6 +189,21 @@ h2{
     height: 250px;
   }
 }
+/* courses */
+.course-card{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.course-logo{
+    width:30px;
+    height:60px;
+    object-fit:contain;
+    border-radius:30px;
+    /* background:white; */
+    padding:1px;
+}
 
 .card img{
     margin-left: 30px;
@@ -237,6 +252,7 @@ footer{
 <a href="#skills">Skills</a>
 <!-- <a href="#experience">Experience</a> -->
 <a href="#services">Services</a>
+<a href="#courses">Courses</a>
 <a href="#projects">Projects</a>
 <!-- <a href="#achievements">Achievements</a> -->
 <!-- <a href="#testimonials">Testimonials</a> -->
@@ -317,10 +333,49 @@ footer{
 </div>
 </section>
 
+<section id="courses">
+<h2>Courses & Training</h2>
+
+<div class="grid">
+
+  <!-- Udemy -->
+  <div class="card course-card">
+    <img src="images/udemylogo.jpg" class="course-logo">
+    
+    <div>
+      <h4>Flutter Development – Udemy</h4>
+      <p><strong>Date:</strong> June 2025 – July 2025</p>
+      <p>
+        Learned to build cross-platform mobile applications using Flutter,
+        including UI design and state management.
+      </p>
+    </div>
+  </div>
+
+  <!-- ITI -->
+  <div class="card course-card">
+    <img src="images/itilogo.png" class="course-logo">
+    
+    <div>
+      <h4>Full Stack Web Development – ITI</h4>
+      <p><strong>Date:</strong> 2024</p>
+      <p>ITI Summer Training</p>
+      <p>
+        Built full-stack web applications using Python, Django, and SQL.
+      </p>
+    </div>
+  </div>
+
+</div>
+</section>
+
 <!-- 7. Projects -->
- <section id="projects">
+<section id="projects">
   <h2>Projects</h2>
+
   <div class="grid">
+
+    <!-- Weather App -->
     <div class="card">
       <img src="images/weather.png" alt="Weather App">
 
@@ -334,8 +389,34 @@ footer{
         <a href="#" class="btn">View Project</a>
       </div>
     </div>
+
+    <!-- Notes App -->
+    <div class="card">
+      <img src="images/note.png" alt="Notes App">
+
+      <div class="card-content">
+        <h4>Smart Notes App</h4>
+        <p><strong>Description:</strong> A Flutter-based notes application that allows users to create, edit, and delete notes with an enhanced interactive experience.</p>
+
+        <p><strong>Features:</strong><br>
+        • Add current location using Geolocator & Geocoding<br>
+        • Interactive experience using device sensors (Shake & Sensors Plus)<br>
+        • Simple and clean UI design
+        </p>
+
+        <p><strong>Tools:</strong> Flutter, GetX, Floor (SQLite), Geolocator, Sensors</p>
+        <p><strong>Role:</strong> Developer</p>
+        <p><strong>Challenge:</strong> Integrating local database and handling async operations efficiently.</p>
+        <p><strong>Result:</strong> A smart notes management app with location support and interactive features.</p>
+
+        <a href="https://www.linkedin.com/posts/sama-hamdy-0b68b3254_digitalegyptpioneersinitiative-depi-flutter-activity-7433525138530160640-miqx?utm_source=share&utm_medium=member_android&rcm=ACoAAD7H78oB5oqpUOEoqiGiU0kaeYYIxCeHa2I" class="btn">View Project</a>
+      </div>
+    </div>
+
   </div>
 </section>
+
+
 
 
 <!-- <div class="card">
