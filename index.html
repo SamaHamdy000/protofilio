@@ -1,385 +1,231 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sama Hamdy | Portfolio</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    scroll-behavior:smooth;
+:root{
+  --bg:#0a1020; --panel:#111a31; --panel2:#17223f; --line:rgba(255,255,255,.09);
+  --text:#eaf1ff; --muted:#9db0d3; --sky:#54c5f8; --blue:#0b5cd5; --coral:#ff8a6b;
+  --glow:rgba(84,197,248,.22);
+  --display:'Bricolage Grotesque',system-ui,sans-serif;
+  --body:'Instrument Sans',system-ui,sans-serif;
 }
+:root[data-theme="light"]{
+  --bg:#f3f7ff; --panel:#ffffff; --panel2:#e8f0ff; --line:rgba(10,16,32,.1);
+  --text:#0d1630; --muted:#4b5b80; --sky:#0b6fd0; --blue:#0b5cd5; --coral:#e0562f;
+  --glow:rgba(11,92,213,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.65;transition:background .4s,color .4s;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--sky);outline-offset:3px;border-radius:6px}
 
-body{
-    font-family:'Poppins', sans-serif;
-    background:#0f172a;
-    color:white;
-    transition:0.4s;
-}
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--sky),var(--coral));z-index:1100}
 
-body.light{
-    background:#f5f5f5;
-    color:#111;
-}
+nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:1000;display:flex;align-items:center;gap:6px;
+  max-width:calc(100% - 24px);padding:8px 10px 8px 20px;border-radius:999px;background:color-mix(in srgb,var(--panel) 80%,transparent);
+  backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:0 10px 40px rgba(0,0,0,.25)}
+nav strong{font-family:var(--display);font-weight:800;margin-right:14px;white-space:nowrap}
+.links{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.links::-webkit-scrollbar{display:none}
+.links a{text-decoration:none;font-size:14px;color:var(--muted);padding:6px 12px;border-radius:999px;white-space:nowrap;transition:.25s}
+.links a:hover{color:var(--text);background:var(--panel2)}
+.toggle{cursor:pointer;border:1px solid var(--line);background:var(--panel2);color:var(--text);width:36px;height:36px;border-radius:50%;font-size:16px;flex:none}
 
-nav{
-    position:fixed;
-    width:100%;
-    top:0;
-    background:rgba(15,23,42,0.8);
-    backdrop-filter: blur(10px);
-    padding:15px 10%;
-    display:flex;
-    justify-content:space-between;
-    z-index:1000;
-}
+/* Hero */
+.hero{min-height:100vh;display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center;padding:120px 8% 70px;position:relative;
+  background:radial-gradient(60% 50% at 80% 40%,var(--glow),transparent 70%)}
+.hero-text>*{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+.hero-text>:nth-child(1){animation-delay:.1s}.hero-text>:nth-child(2){animation-delay:.25s}
+.hero-text>:nth-child(3){animation-delay:.4s}.hero-text>:nth-child(4){animation-delay:.55s}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}}
+.typewriter{font-family:var(--display);font-weight:800;font-size:clamp(40px,6.4vw,84px);line-height:1.02;letter-spacing:-.03em;min-height:2.1em}
+.cursor{display:inline-block;width:4px;height:.85em;background:var(--sky);margin-left:4px;vertical-align:-.05em;animation:blink .8s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero h3{font-family:var(--display);font-size:clamp(20px,2.4vw,30px);font-weight:700;color:var(--sky);margin:22px 0 8px}
+.hero p{color:var(--muted);font-size:18px;max-width:46ch}
+.cta{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 26px;border-radius:999px;background:var(--sky);color:#06101f;font-weight:600;text-decoration:none;transition:transform .25s,box-shadow .25s;border:1px solid transparent}
+.btn:hover{transform:translateY(-3px);box-shadow:0 10px 28px var(--glow)}
+.btn.ghost{background:transparent;color:var(--text);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--sky)}
 
-nav a{
-    color:inherit;
-    text-decoration:none;
-    margin-left:20px;
-}
+.phone{position:relative;justify-self:center;width:min(100%,360px);animation:rise 1s .2s cubic-bezier(.2,.7,.2,1) both}
+.phone::before{content:"";position:absolute;inset:6% -8% -6% 10%;background:linear-gradient(160deg,var(--blue),var(--sky));border-radius:48px;transform:rotate(6deg);opacity:.85}
+.phone .frame{position:relative;border-radius:44px;border:9px solid var(--panel);background:var(--panel);overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.4);aspect-ratio:3/4.1}
+.phone .frame::after{content:"";position:absolute;top:10px;left:50%;transform:translateX(-50%);width:88px;height:22px;border-radius:20px;background:var(--panel)}
+.phone img{width:100%;height:100%;object-fit:cover;display:block}
+.chip{position:absolute;z-index:2;padding:8px 16px;border-radius:999px;background:var(--panel);border:1px solid var(--line);font-weight:600;font-size:14px;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.chip.a{top:12%;left:-14%;color:var(--sky)}.chip.b{top:50%;right:-12%;color:var(--coral)}.chip.c{bottom:10%;left:-8%}
 
-.toggle{
-    cursor:pointer;
-    padding:2px 10px;
-    border:1px solid #38bdf8;
-    border-radius:20px;
-    margin-left: 12px;
-}
+/* Sections */
+section.sec{display:grid;grid-template-columns:240px 1fr;gap:50px;padding:110px 8%;border-top:1px solid var(--line)}
+.sec>h2{font-family:var(--display);font-size:clamp(28px,3.4vw,42px);font-weight:800;letter-spacing:-.02em;line-height:1.1;position:sticky;top:100px;align-self:start}
+.sec>h2::after{content:"";display:block;width:44px;height:5px;border-radius:5px;background:var(--coral);margin-top:16px}
+.stack{display:grid;gap:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:26px;transition:border-color .3s,transform .3s}
+.card:hover{border-color:var(--sky)}
+.card h4{font-family:var(--display);font-size:20px;font-weight:700;margin-bottom:8px}
+.card p{color:var(--muted)}
+.card p strong{color:var(--text);font-weight:600}
+.edu h4 span{display:block;font-size:14px;font-weight:500;color:var(--coral);margin-top:2px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.chips span{padding:6px 14px;border-radius:999px;background:var(--panel2);border:1px solid var(--line);font-size:14px;color:var(--text)}
+.ico{font-size:30px;display:block;margin-bottom:10px}
 
-section{
-    padding:100px 10%;
-    min-height:100vh;
-}
+/* Courses as timeline */
+.course{display:flex;gap:22px;align-items:center}
+.course img{width:92px;height:92px;border-radius:50%;object-fit:cover;background:#fff;border:1px solid var(--line);flex:none}
+.course .when{display:inline-block;color:var(--coral);font-weight:600;font-size:14px;margin-bottom:6px}
 
-h2{
-    margin-bottom:30px;
-    font-size:32px;
-    color:#38bdf8;
-}
+/* Projects */
+.project{display:grid;grid-template-columns:190px 1fr;gap:28px;align-items:start}
+.shot{border-radius:26px;border:6px solid var(--panel2);overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.28);background:var(--panel2)}
+.shot img{display:block;width:100%;height:340px;object-fit:cover}
+.project:hover{transform:translateY(-6px);box-shadow:0 20px 50px var(--glow)}
+.project h4{font-size:24px}
+.project p{margin-bottom:8px;font-size:15px}
+.project .btn{margin-top:10px}
 
-/* Cover */
-.cover{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-}
+/* Contact */
+.contact p{font-size:18px;color:var(--muted)}
+.contact .mail{display:block;font-family:var(--display);font-weight:800;font-size:clamp(22px,3.6vw,44px);letter-spacing:-.02em;color:var(--text);text-decoration:none;margin:14px 0 8px;overflow-wrap:anywhere;transition:color .25s}
+.contact .mail:hover{color:var(--sky)}
+.contact a.li{color:var(--sky);font-weight:600}
+footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid var(--line);font-size:14px}
 
-.cover img{
-    height: 415px;
-    border-radius:20%;
-    margin-bottom:20px;
-    border:3px solid #593b3c;
-    animation: float 3s ease-in-out infinite;
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;padding-top:110px;gap:40px}
+  .phone{width:min(78%,320px)}
+  .chip.a{left:-6%}.chip.b{right:-6%}
+  section.sec{grid-template-columns:1fr;gap:26px;padding:80px 6%}
+  .sec>h2{position:static}
 }
-
-@keyframes float{
-    50%{transform:translateY(-10px);}
+@media (max-width:600px){
+  nav strong{display:none}
+  .project{grid-template-columns:1fr}
+  .shot{max-width:220px}
+  .course{flex-direction:column;align-items:flex-start}
 }
-
-.typewriter{
-    font-size:40px;
-    font-weight:bold;
-}
-
-.cursor{
-    width:3px;
-    background:#38bdf8;
-    display:inline-block;
-    animation: blink 0.7s infinite;
-}
-
-@keyframes blink{
-    50%{opacity:0;}
-}
-
-/* Cards */
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-}
-
-.card{
-    background:rgba(255,255,255,0.05);
-    padding:20px;
-    border-radius:15px;
-    backdrop-filter:blur(10px);
-    transition:0.4s;
-    opacity:0;
-    transform:translateY(40px);
-    
-}
-#projects .grid {
-  display: flex;
-  justify-content: center;
-}
-
-#projects .card {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  max-width: 700px;
-  padding: 20px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(15px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  transition: all 0.4s ease;
-}
-
-#projects .card:hover {
-  transform: translateY(-12px) scale(1.02);
-  box-shadow: 0 15px 40px rgba(56, 189, 248, 0.4);
-}
-
-/* Image styling */
-#projects .card img {
-  width: 150px;
-  height: 300px;
-  border-radius: 15px;
-  margin: 0;
-}
-
-/* Text content */
-#projects .card-content {
-  flex: 1;
-}
-
-/* Title */
-#projects .card h4 {
-  font-size: 20px;
-  margin-bottom: 10px;
-  color: #38bdf8;
-}
-
-/* Paragraph spacing */
-#projects .card p {
-  font-size: 14px;
-  line-height: 1.5;
-  margin-bottom: 8px;
-}
-
-/* Button */
-#projects .btn {
-  display: inline-block;
-  margin-top: 12px;
-  padding: 8px 18px;
-  font-size: 14px;
-  border-radius: 25px;
-}
-
-/* Responsive for mobile */
-@media (max-width: 768px) {
-  #projects .card {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  #projects .card img {
-    width: 80%;
-    height: 250px;
-  }
-}
-/* courses */
-.course-card{
-    display:flex;
-    align-items:center;
-    gap:20px;
-}
-
-.course-logo{
-    width:30px;
-    height:60px;
-    object-fit:contain;
-    border-radius:30px;
-    /* background:white; */
-    padding:1px;
-}
-
-.card img{
-    margin-left: 30px;
-    width:50%;
-    border-radius:10px;
-    margin-bottom:15px;
-    text-align: center;
-}
-
-.card:hover{
-    transform:translateY(-10px);
-    box-shadow:0 10px 30px rgba(56,189,248,0.3);
-}
-
-.show{
-    opacity:1 !important;
-    transform:translateY(0) !important;
-    transition:1s;
-}
-
-.btn{
-    display:inline-block;
-    margin-top:10px;
-    padding:10px 20px;
-    background:#38bdf8;
-    color:#0f172a;
-    border-radius:30px;
-    text-decoration:none;
-    font-weight:bold;
-}
-
-footer{
-    text-align:center;
-    padding:20px;
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
 }
 </style>
 </head>
-
 <body>
+<div id="bar"></div>
 
 <nav>
-<div><strong>Sama Hamdy</strong></div>
-<div>
-<a href="#about">About</a>
-<a href="#education">Education</a>
-<a href="#skills">Skills</a>
-<!-- <a href="#experience">Experience</a> -->
-<a href="#services">Services</a>
-<a href="#courses">Courses</a>
-<a href="#projects">Projects</a>
-<!-- <a href="#achievements">Achievements</a> -->
-<!-- <a href="#testimonials">Testimonials</a> -->
-<a href="#contact">Contact</a>
-<span class="toggle" onclick="toggleMode()">🌙</span>
-</div>
+  <strong>Sama Hamdy</strong>
+  <div class="links">
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#skills">Skills</a>
+    <a href="#services">Services</a>
+    <a href="#courses">Courses</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <button class="toggle" onclick="toggleMode()" aria-label="Toggle dark and light mode" id="tg">🌙</button>
 </nav>
 
 <!-- 1. Cover -->
-<section class="cover">
-<img src="images/Image.jpeg">
-<div class="typewriter">
-<span id="text"></span><span class="cursor"></span>
-</div>
-<h3>Flutter & Web Developer</h3>
-<p>Building smart and modern digital solutions.</p>
-</section>
+<header class="hero">
+  <div class="hero-text">
+    <div class="typewriter" aria-label="Hi, I'm Sama Hamdy"><span id="text"></span><span class="cursor"></span></div>
+    <h3>Flutter &amp; Web Developer</h3>
+    <p>Building smart and modern digital solutions.</p>
+    <div class="cta">
+      <a class="btn" href="#projects">Projects</a>
+      <a class="btn ghost" href="#contact">Contact Me</a>
+    </div>
+  </div>
+  <div class="phone">
+    <span class="chip a">Flutter</span>
+    <span class="chip b">Dart</span>
+    <span class="chip c">Django</span>
+    <div class="frame"><img src="images/Image.jpeg" alt="Sama Hamdy"></div>
+  </div>
+</header>
 
 <!-- 2. About -->
-<section id="about">
-<h2>About Me</h2>
-<div class="grid">
-<div class="card">
-<h4>Key Skills</h4>
-<p>Problem solving, UI Design, Mobile Development</p>
-</div>
-<div class="card">
-<h4>Experience</h4>
-<p>Developing mobile and web apps using modern technologies.</p>
-</div>
-<div class="card">
-<h4>Value Proposition</h4>
-<p>Flutter Developer | Building smart apps that make technology simple, fast, and impactful.</p>
-</div>
-</div>
+<section class="sec" id="about">
+  <h2>About Me</h2>
+  <div class="grid">
+    <div class="card"><h4>Key Skills</h4><p>Problem solving, UI Design, Mobile Development</p></div>
+    <div class="card"><h4>Experience</h4><p>Developing mobile and web apps using modern technologies.</p></div>
+    <div class="card"><h4>Value Proposition</h4><p>Flutter Developer | Building smart apps that make technology simple, fast, and impactful.</p></div>
+  </div>
 </section>
 
 <!-- 3. Education -->
-<section id="education">
-<h2>Education</h2>
-<div class="card">
-<h4>Bachelor of Computer Science        (2022 – Present) </h4>
-<p>Faculty of Computers and Information, Suez Canal University </p>
-<p><strong>Courses:</strong> OOP, Data Structures, Mobile Dev,Algorithms</p>
-<p>Overall Grade: B+ </p>
-</div>
+<section class="sec" id="education">
+  <h2>Education</h2>
+  <div class="card edu">
+    <h4>Bachelor of Computer Science <span>(2022 – 2026)</span></h4>
+    <p>Faculty of Computers and Information, Suez Canal University</p>
+    <p><strong>Courses:</strong> OOP, Data Structures, Mobile Dev, Algorithms</p>
+    <p>Overall Grade: B+</p>
+  </div>
 </section>
 
 <!-- 4. Skills -->
-<section id="skills">
-<h2>Skills</h2>
-<div class="grid">
-<div class="card"><h4>Technical</h4><p>Dart, Flutter, HTML, CSS, JS</p></div>
-<div class="card"><h4>Tools</h4><p>
-• Django (Python Web Development) </p><p>
-• Git / GitHub   </p><p> •VS Code</p></div>
-<div class="card"><h4>Languages</h4><p>  English B2+ </p></div>
-</div>
+<section class="sec" id="skills">
+  <h2>Skills</h2>
+  <div class="grid">
+    <div class="card"><h4>Technical</h4><div class="chips"><span>Dart</span><span>Flutter</span><span>HTML</span><span>CSS</span><span>JS</span></div></div>
+    <div class="card"><h4>Tools</h4><div class="chips"><span>Django (Python Web Development)</span><span>Git / GitHub</span><span>VS Code</span></div></div>
+    <div class="card"><h4>Languages</h4><div class="chips"><span>English B2+</span></div></div>
+  </div>
 </section>
-
-<!-- 5. Work Experience -->
-<!-- <section id="experience">
-<h2>Work Experience</h2>
-<div class="card">
-<h4>Intern / Part-time</h4>
-<p>Company Name | 2024</p>
-<p>Same details like your CV responsibilities.</p>
-</div>
-</section> -->
 
 <!-- 6. Services -->
-<section id="services">
-<h2>Offered Services</h2>
-<div class="grid">
-<div class="card"><h4>📱 Mobile Apps</h4><p>Flutter cross-platform apps.</p></div>
-<div class="card"><h4>🌐 Websites</h4><p>Responsive modern websites.</p></div>
-<div class="card"><h4>🎨 UI Design</h4><p>Clean and user-friendly interfaces.</p></div>
-</div>
+<section class="sec" id="services">
+  <h2>Offered Services</h2>
+  <div class="grid">
+    <div class="card"><span class="ico">📱</span><h4>Mobile Apps</h4><p>Flutter cross-platform apps.</p></div>
+    <div class="card"><span class="ico">🌐</span><h4>Websites</h4><p>Responsive modern websites.</p></div>
+    <div class="card"><span class="ico">🎨</span><h4>UI Design</h4><p>Clean and user-friendly interfaces.</p></div>
+  </div>
 </section>
 
-<section id="courses">
-<h2>Courses & Training</h2>
-
-<div class="grid">
-
-  <!-- Udemy -->
-  <div class="card course-card">
-    <img src="images/udemylogo.jpg" class="course-logo">
-    
-    <div>
-      <h4>Flutter Development – Udemy</h4>
-      <p><strong>Date:</strong> June 2025 – July 2025</p>
-      <p>
-        Learned to build cross-platform mobile applications using Flutter,
-        including UI design and state management.
-      </p>
+<!-- Courses -->
+<section class="sec" id="courses">
+  <h2>Courses &amp; Training</h2>
+  <div class="stack">
+    <div class="card course">
+      <img src="images/udemylogo.jpg" alt="Udemy">
+      <div>
+        <h4>Flutter Development – Udemy</h4>
+        <p><strong>Date:</strong> June 2025 – July 2025</p>
+        <p>Learned to build cross-platform mobile applications using Flutter, including UI design and state management.</p>
+      </div>
+    </div>
+    <div class="card course">
+      <img src="images/itilogo.png" alt="ITI">
+      <div>
+        <h4>Full Stack Web Development – ITI</h4>
+        <p><strong>Date:</strong> 2024</p>
+        <p>ITI Summer Training</p>
+        <p>Built full-stack web applications using Python, Django, and SQL.</p>
+      </div>
     </div>
   </div>
-
-  <!-- ITI -->
-  <div class="card course-card">
-    <img src="images/itilogo.png" class="course-logo">
-    
-    <div>
-      <h4>Full Stack Web Development – ITI</h4>
-      <p><strong>Date:</strong> 2024</p>
-      <p>ITI Summer Training</p>
-      <p>
-        Built full-stack web applications using Python, Django, and SQL.
-      </p>
-    </div>
-  </div>
-
-</div>
 </section>
 
 <!-- 7. Projects -->
-<section id="projects">
+<section class="sec" id="projects">
   <h2>Projects</h2>
-
-  <div class="grid">
-
-    <!-- Weather App -->
-    <div class="card">
-      <img src="images/weather.png" alt="Weather App">
-
-      <div class="card-content">
+  <div class="stack">
+    <div class="card project">
+      <div class="shot"><img src="images/weather.png" alt="Weather App"></div>
+      <div>
         <h4>Weather App</h4>
         <p><strong>Description:</strong> A Flutter-based weather app that displays real-time weather data using an external API.</p>
         <p><strong>Tools:</strong> Flutter, REST API, JSON</p>
@@ -389,112 +235,62 @@ footer{
         <a href="#" class="btn">View Project</a>
       </div>
     </div>
-
-    <!-- Notes App -->
-    <div class="card">
-      <img src="images/note.png" alt="Notes App">
-
-      <div class="card-content">
+    <div class="card project">
+      <div class="shot"><img src="images/note.png" alt="Notes App"></div>
+      <div>
         <h4>Smart Notes App</h4>
         <p><strong>Description:</strong> A Flutter-based notes application that allows users to create, edit, and delete notes with an enhanced interactive experience.</p>
-
         <p><strong>Features:</strong><br>
-        • Add current location using Geolocator & Geocoding<br>
-        • Interactive experience using device sensors (Shake & Sensors Plus)<br>
-        • Simple and clean UI design
-        </p>
-
+        • Add current location using Geolocator &amp; Geocoding<br>
+        • Interactive experience using device sensors (Shake &amp; Sensors Plus)<br>
+        • Simple and clean UI design</p>
         <p><strong>Tools:</strong> Flutter, GetX, Floor (SQLite), Geolocator, Sensors</p>
         <p><strong>Role:</strong> Developer</p>
         <p><strong>Challenge:</strong> Integrating local database and handling async operations efficiently.</p>
         <p><strong>Result:</strong> A smart notes management app with location support and interactive features.</p>
-
         <a href="https://www.linkedin.com/posts/sama-hamdy-0b68b3254_digitalegyptpioneersinitiative-depi-flutter-activity-7433525138530160640-miqx?utm_source=share&utm_medium=member_android&rcm=ACoAAD7H78oB5oqpUOEoqiGiU0kaeYYIxCeHa2I" class="btn">View Project</a>
       </div>
     </div>
-
   </div>
 </section>
 
-
-
-
-<!-- <div class="card">
-<img src="project2.jpg">
-<h4>Project Two</h4>
-<p><strong>Description:</strong> Brief description.</p>
-<p><strong>Tools:</strong> HTML, CSS, JS</p>
-<p><strong>Role:</strong> Frontend Dev</p>
-<p><strong>Challenge:</strong> Performance improvement.</p>
-<p><strong>Result:</strong> Better UX.</p>
-<a href="#" class="btn">View Project</a>
-</div>
-</div> -->
-</section>
-
-<!-- 8. Achievements -->
-<!-- <section id="achievements">
-<h2>Achievements</h2>
-<div class="card">
-<h4>Award Name</h4>
-<p>Award Provider | 2024</p>
-<p>Short description of the award achievement.</p>
-</div>
-</section> -->
-
-<!-- 9. Testimonials -->
-<!-- <section id="testimonials">
-<h2>Testimonials</h2>
-<div class="grid">
-<div class="card">
-<img src="person1.jpg">
-<p><strong>Person Name</strong> – Supervisor</p>
-<p>"Sama delivers professional and high-quality work."</p>
-</div>
-</div>
-</section> -->
-
 <!-- 10. Contact -->
-<section id="contact">
-<h2>Contact Me</h2>
-<p>Let’s work together!</p>
-<p>Email: samahamdy599@gmail.com</p>
-<p>Phone: 01208108194</p>
-<p><a href="https://www.linkedin.com/in/sama-hamdy-0b68b3254" target="_blank">LinkedIn Profile</a></p>
+<section class="sec contact" id="contact">
+  <h2>Contact Me</h2>
+  <div>
+    <p>Let’s work together!</p>
+    <a class="mail" href="mailto:samahamdy599@gmail.com">samahamdy599@gmail.com</a>
+    <p>Phone: 01208108194</p>
+    <p style="margin-top:14px"><a class="li" href="https://www.linkedin.com/in/sama-hamdy-0b68b3254" target="_blank" rel="noopener">LinkedIn Profile</a></p>
+  </div>
 </section>
 
-<footer>
-© 2026 Sama Hamdy | All Rights Reserved
-</footer>
+<footer>© 2026 Sama Hamdy | All Rights Reserved</footer>
 
 <script>
 // Typewriter
 const text = "Hi, I'm Sama Hamdy";
 let i = 0;
+const el = document.getElementById("text");
 function type(){
-if(i < text.length){
-document.getElementById("text").innerHTML += text.charAt(i);
-i++;
-setTimeout(type,100);
-}
+  if(i < text.length){ el.textContent += text.charAt(i); i++; setTimeout(type,90); }
 }
 type();
 
-// Scroll animation
-const cards = document.querySelectorAll('.card');
-window.addEventListener('scroll',()=>{
-cards.forEach(card=>{
-if(card.getBoundingClientRect().top < window.innerHeight-100){
-card.classList.add('show');
-}
-});
-});
+// Scroll progress
+const bar = document.getElementById("bar");
+addEventListener("scroll",()=>{
+  const h = document.documentElement;
+  bar.style.width = (h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+"%";
+},{passive:true});
 
-// Dark mode
+// Dark / light mode
 function toggleMode(){
-document.body.classList.toggle("light");
+  const r = document.documentElement;
+  const light = r.dataset.theme !== "light";
+  r.dataset.theme = light ? "light" : "dark";
+  document.getElementById("tg").textContent = light ? "☀️" : "🌙";
 }
 </script>
-
 </body>
 </html>
